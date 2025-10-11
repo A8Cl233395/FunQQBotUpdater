@@ -1,0 +1,15 @@
+description: |-
+  更新readme，installatione, user_guide
+  修复聊天模式无法搜索
+  修复umi-ocr无法使用
+
+updated_files:
+  - assets/MIT
+  - assets/MPL-2.0
+  - bigmodel_apis.py
+  - bigmodel.py
+  - main.py
+  - README.md
+  - requirements.txt
+  - settings-template.py
+  - spider.py
