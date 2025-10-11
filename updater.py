@@ -5,23 +5,22 @@ if confirm.lower() != 'y':
     exit(0)
 
 import requests, yaml
-
-latest_versions_url = "https://raw.githubusercontent.com/A8Cl233395/FunQQBotUpdater/refs/heads/main/latest.yaml"
-
-latest_version_yaml = requests.get(latest_versions_url, timeout=10).text
-
-print(latest_version_yaml)
-
-updater_version = 1
-
+try:
+    latest_version_yaml = requests.get("https://raw.githubusercontent.com/A8Cl233395/FunQQBotUpdater/refs/heads/main/latest.yaml", timeout=10).text
+except requests.Timeout:
+    print("请求超时，请检查网络连接")
+    exit(1)
+updater_version = 2
 latest_version_json = yaml.safe_load(latest_version_yaml)
-
 print("当前更新器版本:", updater_version, "最新更新器版本:", latest_version_json["latest_updater_version"])
-
 if latest_version_json["latest_updater_version"] > updater_version:
     print("检测到更新器有新版本，正在下载最新版本...")
-    latest_updater_url = "https://github.com/A8Cl233395/FunQQBotUpdater/blob/main/updater.py"
-    latest_updater_code = requests.get(latest_updater_url).text
+    latest_updater_url = "https://raw.githubusercontent.com/A8Cl233395/FunQQBotUpdater/refs/heads/main/updater.py"
+    try:
+        latest_updater_code = requests.get(latest_updater_url).text
+    except requests.Timeout:
+        print("请求超时，请检查网络连接")
+        exit(1)
     with open("updater.py", "w", encoding="utf-8") as f:
         f.write(latest_updater_code)
     print("更新完成，请重新运行本脚本")
