@@ -31,7 +31,7 @@ else:
 
 with open("settings.yaml", "r", encoding="utf-8") as f:
     local_settings = yaml.safe_load(f)
-version = yaml.safe_load(local_settings)["VERSION"]
+version = local_settings["VERSION"]
 
 print("当前程序版本:", version, "最新程序版本:", latest_version_json["latest_version"])
 
